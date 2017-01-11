@@ -6,7 +6,7 @@ import pytest
 
 random.seed(0)
 
-from broize import *
+from botbot import *
 
 def test_random_utterance():
     """An utterance which is unparsable should return one of the random responses"""
