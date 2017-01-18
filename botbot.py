@@ -7,37 +7,18 @@ os.environ['NLTK_DATA'] = os.getcwd() + '/nltk_data'
 
 from textblob import TextBlob
 from config import FILTER_WORDS
+from langs.en.greetings import *
 
 logging.basicConfig()
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
-# start:example-hello.py
-# Sentences we'll respond with if the user greeted us
-GREETING_KEYWORDS = ("hello", "hi", "greetings", "sup", "what's up",)
-
-GREETING_RESPONSES = ["hello!", "hey"]
 
 def check_for_greeting(sentence):
     """If any of the words in the user's input was a greeting, return a greeting response"""
     for word in sentence.words:
         if word.lower() in GREETING_KEYWORDS:
             return random.choice(GREETING_RESPONSES)
-# start:example-none.py
-# Sentences we'll respond with if we have no idea what the user just said
-NONE_RESPONSES = [
-    "uhhh okay",
-    "Not sure what you meant",
-]
-# end
-
-# start:example-self.py
-# If the user tries to tell us something about ourselves, use one of these responses
-COMMENTS_ABOUT_SELF = [
-    "Thanks for letting me know",
-]
-# end
-
 
 class UnacceptableUtteranceException(Exception):
     """Raise this (uncaught) exception if the response was going to trigger our blacklist"""
@@ -151,25 +132,6 @@ def check_for_comment_about_bot(pronoun, noun, adjective):
         else:
             resp = random.choice(SELF_VERBS_WITH_ADJECTIVE).format(**{'adjective': adjective})
     return resp
-
-# Template for responses that include a direct noun which is indefinite/uncountable
-SELF_VERBS_WITH_NOUN_CAPS_PLURAL = [
-    "My last startup totally crushed the {noun} vertical",
-    "Were you aware I was a serial entrepreneur in the {noun} sector?",
-    "My startup is Uber for {noun}",
-    "I really consider myself an expert on {noun}",
-]
-
-SELF_VERBS_WITH_NOUN_LOWER = [
-    "Yeah but I know a lot about {noun}",
-    "People always ask me about {noun}",
-]
-
-SELF_VERBS_WITH_ADJECTIVE = [
-    "I'm personally building the {adjective} Economy",
-    "I consider myself to be a {adjective}preneur",
-]
-# end
 
 def preprocess_text(sentence):
     """Handle some weird edge cases in parsing, like 'i' needing to be capitalized
