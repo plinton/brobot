@@ -106,10 +106,10 @@ def construct_response(pronoun, noun, verb):
         verb_word = verb[0]
         if verb_word in ('be', 'am', 'is', "'m"):  # This would be an excellent place to use lemmas!
             if pronoun.lower() == 'you':
-                # The bot will always tell the person they aren't whatever they said they were
-                resp.append("aren't really")
-            else:
-                resp.append(verb_word)
+                # Respond positively
+                resp.append("definitely are")
+        else:
+            resp.append(verb_word)
     if noun:
         pronoun = "an" if starts_with_vowel(noun) else "a"
         resp.append(pronoun + " " + noun)
