@@ -2,6 +2,7 @@ from __future__ import print_function, unicode_literals
 import random
 import logging
 import os
+import argparse
 
 os.environ['NLTK_DATA'] = os.getcwd() + '/nltk_data'
 
@@ -216,11 +217,7 @@ def filter_response(resp):
 # end
 
 if __name__ == '__main__':
-    import sys
-    # Usage:
-    # python broize.py "I am an engineer"
-    if (len(sys.argv) > 0):
-        saying = sys.argv[1]
-    else:
-        saying = "How are you, botbot?"
-    print(response(saying))
+    parser = argparse.ArgumentParser()
+    parser.add_argument("sentence", nargs="+")
+    args = parser.parse_args()
+    print(logged_respond(" ".join(args.sentence)))

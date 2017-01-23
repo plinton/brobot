@@ -1,7 +1,7 @@
 # Sentences we'll respond with if the user greeted us
 GREETING_KEYWORDS = ("hello", "hi", "greetings", "sup", "what's up",)
 
-GREETING_RESPONSES = ["hello!", "hey"]
+GREETING_RESPONSES = ["hello", "hey"]
 
 # Sentences we'll respond with if we have no idea what the user just said
 NONE_RESPONSES = [
